@@ -1,0 +1,11 @@
+{
+    "recording_date":"01/11/1984  8:27:32",
+    "age":19,
+    "height":55,
+    "weight": 80,
+    "nurse": 0,
+    "site": 2,
+    "device": "CS-12   E",
+    "sex": "Male",
+    "patient_id": 1
+}

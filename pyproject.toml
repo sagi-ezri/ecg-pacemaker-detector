@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "ecg_pacemaker_mini_project"
+version = "0.1.0"
+description = ""
+authors = ["Sagi Ezri <sagi.ezri@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+numpy = "*"
+Flask = "1.0.2"
+wfdb = "*"
+joblib = "^1.1.0"
+tensorflow = "*"
+keras = "2.6.*"
+
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+infer = "ecg_pacemaker_mini_project.app:start"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
