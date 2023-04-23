@@ -1,5 +1,6 @@
 /venv
 .vscode/
+.flake8
 **/__pycache__/
 **/.ipynb_checkpoints/
 .DS_Store
