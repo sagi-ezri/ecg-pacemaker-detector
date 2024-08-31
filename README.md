@@ -1,89 +1,97 @@
+
 # ECG Pacemaker Classifier
-A pacemaker is a small device that's placed (implanted) in the chest to help control the heartbeat. It's used to prevent the heart from beating too slowly. Implanting a pacemaker in the chest requires a surgical procedure. The presence of a pacemaker on ECG is manifested by stimulation artifacts as demonstrated in the image below:
-![image](https://user-images.githubusercontent.com/23264468/168440205-7ba62bea-3927-4422-9138-9d00274ec601.png)
 
+A pacemaker is a small device implanted in the chest to help regulate the heartbeat, typically used to prevent the heart from beating too slowly. The presence of a pacemaker on an ECG is indicated by stimulation artifacts, as shown in the image below:
 
+![Pacemaker ECG](https://user-images.githubusercontent.com/23264468/168440205-7ba62bea-3927-4422-9138-9d00274ec601.png)
 
-## Description
+## Project Overview
 
-In this mini-project, we created an algorithm to classify ECG records with a pacemaker and analyze its performance, and also deployment phase.
+This project involves the development of an algorithm to classify ECG records for the presence of a pacemaker. The solution includes both model development and deployment phases, designed to operate in a production environment.
 
-### Application:
-* Implement a production level system that wraps your model. 
-* Specifically, given an input signal and its metadata (e.g. age, sex, scan date, etc) the system checks if the patient is above 18 years old, 
-if yes it applies the pacemaker algorithm and returns an output object containing the algorithm result (True/False),
-patient age, and scan date; otherwise it throws an exception and returns the output object with patient age, scan date and empty algorithm result.
+### Key Features
 
-### NN Model:
-![image](https://user-images.githubusercontent.com/23264468/168440174-edf9bc5c-aa50-4640-b283-10e97978b4b3.png)
+- **Production-Ready Application**: A fully containerized system that wraps the pacemaker classification model, ensuring ease of deployment and scalability.
+- **Intelligent Processing**: The application processes input ECG signals and metadata (e.g., age, sex, scan date). If the patient is over 18 years old, the algorithm runs and returns the classification result along with the patient's age and scan date. For patients under 18, the algorithm skips processing, returning an empty result.
 
-* **Model explanation**:
+## Neural Network Model
 
-  * I've created a convolution neural network based model with 2 convolution layers and 2 maxpooling layers.
-  * Applied flat layer to get all features into one dimension. 
-  * Applied one dense layer.
-  * To fine tune the model and finally output layer with 2 neurons (True, False) is being added.
-  * Throughout the model, I have used relu activation.
+![Neural Network Model](https://user-images.githubusercontent.com/23264468/168440174-edf9bc5c-aa50-4640-b283-10e97978b4b3.png)
+
+### Model Architecture
+
+- **Convolutional Layers**: The model is built using a Convolutional Neural Network (CNN) with two convolutional layers and two max-pooling layers.
+- **Flattening**: A flattening layer is used to convert the features into a single dimension.
+- **Dense Layer**: A dense layer processes the flattened features.
+- **Output Layer**: The final output layer consists of two neurons (True/False) to predict the presence of a pacemaker.
+- **Activation Function**: ReLU activation is used throughout the model.
+
 ## Getting Started
 
 ### Prerequisites
 
-* WSL 2 platform to run dockerize environment Or cloud platform with linux OS and docker package
-* The application is fully containerized for production
-* The docker container could be also as development environment for further application uses 
+- **Platform**: This application runs on a WSL 2 platform or any Linux-based cloud environment with Docker installed.
+- **Containerization**: The application is fully containerized, supporting both production and development environments.
 
-### Installing
+### Installation
 
-* run:
-```
+To set up the application, pull the Docker image using the following command:
+
+```bash
 docker pull sagiezri/ecg_pacemaker_classifier:version1.0
 ```
 
-### Executing program
+### Running the Application
 
-* Server side—run:
-```
+#### Server Side
+
+To run the server, execute:
+
+```bash
 sudo docker run -p 80:3000 sagiezri/ecg_pacemaker_classifier:version1.0
 ```
-* To run POST client request run from your machine:
-```
+
+#### Client Side
+
+To make a POST request to the server, use the following `curl` command:
+
+```bash
 curl -F files=@ecg_predict.txt -F files=@00001_lr.dat -F files=@00001_lr.hea http://server-public-dns/predict
 ```
-* An example for the ecg_predict.txt file (we convert the txt file to JSON):
-```
+
+#### Example Input File
+
+Here’s an example of the `ecg_predict.txt` file, which should be converted to JSON:
+
+```json
 {
-    "recording_date":"01/11/1984  8:27:32",
-    "age":18,
-    "height":55,
+    "recording_date": "01/11/1984 08:27:32",
+    "age": 18,
+    "height": 55,
     "weight": 80,
     "nurse": 0,
     "site": 2,
-    "device": "CS-12   E",
+    "device": "CS-12 E",
     "sex": "Male",
     "patient_id": 1
 }
 ```
-* The signal data and header files should be also attach as mentioned above in the same order
 
+The signal data and header files should be attached in the same order as mentioned above.
 
-## Help
+## Troubleshooting
 
-Any advice for common problems or issues, ping me.
+For common issues or questions, feel free to reach out to me.
 
-## Authors
+## Author
 
-* Sagi Ezri <sagi.ezri@gmail.com>
+- **Sagi Ezri** - [Email](mailto:sagi.ezri@gmail.com)
 
 ## Version History
 
-* 0.1
-    * Initial Release
+- **0.1**
+  - Initial Release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-
-
-
-
+This project is licensed under the [Your License Name Here] License - see the LICENSE.md file for details.
